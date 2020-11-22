@@ -6,8 +6,15 @@ A small microservice orianted messaging app which is developed in .Net Core 3.1.
 - Both Project use Autofac as IoC
 
 **You can get images of project from my Docker Hub Repository**
- - erdierkmen/todolistmicroservice_todolistapi
- - erdierkmen/todolistmicroservice_userapi
+ - https://hub.docker.com/r/erdierkmen/todolistmicroservice_todolistapi
+ ```
+docker pull erdierkmen/todolistmicroservice_todolistapi
+```
+ - https://hub.docker.com/r/erdierkmen/todolistmicroservice_userapi
+```
+docker pull erdierkmen/todolistmicroservice_userapi
+```
+
 
 **To run Test project go to solution folder and run following commond**
 ```
