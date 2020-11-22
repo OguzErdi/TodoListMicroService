@@ -1,0 +1,46 @@
+version: '3.4'
+
+services:
+    todolistmicroservice_seq:
+        container_name: todolistmicroservice_seq
+        restart: always
+        ports:
+            - "5341:80"
+
+    todolistmicroservice_db:
+        container_name: todolistmicroservice_db
+        restart: always
+        ports:
+          - "8091:8091"
+          - "8092:8092"
+          - "8093:8093"
+          - "8094:8094"
+          - "11210:11210"
+
+    todolistmicroservice_todolist.api:
+        container_name: todolistmicroservice_todolistapi
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "Couchbase:ConnectionString:=todolistmicroservice_db:8091"
+        depends_on:
+            - todolistmicroservice_db
+            - todolistmicroservice_seq
+        volumes:
+            - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/
+        ports:
+            - "8000:80"
+
+    todolistmicroservice_user.api:
+        container_name: todolistmicroservice_userapi
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "Couchbase:ConnectionString:=todolistmicroservice_db:8091"
+        depends_on:
+            - todolistmicroservice_db
+            - todolistmicroservice_seq
+        volumes:
+            - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/
+        ports:
+            - "9000:80"

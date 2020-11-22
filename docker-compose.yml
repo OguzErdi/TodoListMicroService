@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+    todolistmicroservice_seq:
+        image: datalust/seq:latest
+        environment:
+            ACCEPT_EULA: Y
+    
+    todolistmicroservice_db:
+        image: couchbase
+    
+    todolistmicroservice_todolist.api:
+        image: ${DOCKER_REGISTRY-}todolistapi
+        build:
+            context: .
+            dockerfile: src/TodoList/TodoList.API/Dockerfile
+    
+    todolistmicroservice_user.api:
+        image: ${DOCKER_REGISTRY-}messagemicroservice_userapi
+        build:
+            context: .
+            dockerfile: src/User/User.API/Dockerfile
